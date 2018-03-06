@@ -196,6 +196,102 @@ $(document).ready(function () {
     }
   });
 
+  /////////////////////////////////
+  //// *** Payment Section ***
+  /////////////////////////////////////
+
+  // Hide HTML elements until proper selection is made
+  $('#paypal, #bitcoin').hide();
+
+  // Function to display credit card, bitcoin message or paypal message depending on user selection
+  $('#payment').change(function(){
+  	if ($('#payment option:selected').val() === "paypal") {
+  		$('#credit-card, #bitcoin').hide();
+  		$('#paypal').show();
+  	} else if ($('#payment option:selected').val() === "bitcoin") {
+  		$('#credit-card, #paypal').hide();
+  		$('#bitcoin').show();
+  	} else {
+  		$('#credit-card').show();
+  		$('#paypal, #bitcoin').hide();
+  	}
+  });
+
+
+  // Create the variables to hold expected values for input fields
+
+  var emailAddress = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+  var creditCard = /\b\d{4}(| |-)\d{4}\1\d{4}\1\d{4}\b/g;
+  var zipCode = /^\d{5}(?:[-\s]\d{4})?$/;
+  var errorMessage ="";
+
+  // $('form').prepend('<p id="error-message"></p>')
+  // $('#error-message').hide();
+  $('form').submit(function (e){
+  	e.preventDefault();
+    $('#email-error').hide();
+    $('#activity-error').hide();
+    $('#cc-error').hide();
+    $('#name-error').hide();
+    $('#cc-zip-error').hide();
+    $('#cc-cvv-error').hide();
+
+    // So for the validation, check to see if the form was filled out properly, if not, show error at top.
+    // Name field validation
+	if ( $('#name').val() === "" ) {
+		$("html, body").animate({scrollTop: 0}, "slow");
+    errorMessage = "<br> <p id='name-error' style='color:red; font-size:16px;';> Error: Name field cannot be empy, please enter a Name. </p>";
+    $("#name_field").append(errorMessage);
+		$('#name').focus();
+    console.log("Error: no name was entered into the name field");
+
+    // Email Field Validation
+	} else if ( !emailAddress.test($('#mail').val()) ) {
+		$("html, body").animate({scrollTop: $("#mail").offset().top}, "slow");
+		errorMessage = "<br> <p id='email-error' style='color:red; font-size:16px;';> Error: Please enter a valid email. </p>";
+    $("#mail-field").append(errorMessage);
+		$('#mail').focus();
+    console.log("Error: invalid email address entered");
+
+    // Activities Field Validation
+	} else if ( $(".activities > label > input:checked").length === 0 ) {
+    $("html, body").animate({scrollTop: $(".activities").offset().top}, "slow");
+		errorMessage = "<p id='activity-error' style='color:red; font-size:16px';> Error: Please select at least one activity. </p>";
+    $(".activities").prepend(errorMessage);
+    $('.activities').focus();
+    console.log("Error: One activity must be registered for");
+
+    // Credit Card Field Validation
+	} else if ( $("#payment").val() === "credit card" && !creditCard.test($("#cc-num").val()) )  {
+		$("html, body").animate({scrollTop: $("#cc-num").offset().top}, "slow");
+    errorMessage = "<br><p id='cc-error' style='color:red; font-size:16px;'> Error: Please enter a valid credit card number. </p>";
+    $('#payment-heading').append(errorMessage);
+		$('#cc-num').focus();
+    console.log("Error: invalid credit card entered or missing card info");
+
+    // Zip Code Field Validation
+	} else if ( $("#payment").val() === "credit card" && !zipCode.test($("#zip").val()) )  {
+    $("html, body").animate({scrollTop: $("#cc-num").offset().top}, "slow");
+    errorMessage = "<br><p id='cc-zip-error' style='color:red; font-size:16px;'> Error: Please enter a valid zip code. </p>";
+    $('#payment-heading').append(errorMessage);
+		$('#zip').focus();
+    console.log("Error: invalid credit card entered or missing card info");
+
+    // CVV Field Validation
+	} else if ( $("#payment").val() === "credit card" && $("#cvv").val().length < 3)  {
+    $("html, body").animate({scrollTop: $("#cc-num").offset().top}, "slow");
+    errorMessage = "<br><p id='cc-cvv-error' style='color:red; font-size:16px;'> Error: Please enter a valid CVV number. </p>";
+    $('#payment-heading').append(errorMessage);
+		$('#cvv').focus();
+	} else {
+    // Success Message
+		$("html, body").animate({scrollTop: 0}, "slow");
+		alert("Thank you for registering. Enjoy the conference!");
+	}
+
+});
+
+
 
 
 

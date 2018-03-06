@@ -15,15 +15,15 @@
       <h1>Full Stack Conf</h1>
     </header>
 
-    <form action="index.html" method="post">
+    <form name="regForm" action="index.html" method="post">
 
       <fieldset id="basic-info">
         <legend>Basic Info</legend>
 
-        <label for="name">Name:</label>
+        <label id="name_field" for="name">Name:</label>
         <input type="text" id="name" name="user_name" autofocus>
 
-        <label for="mail">Email:</label>
+        <label id="mail-field" for="mail">Email:</label>
         <input type="email" id="mail" name="user_email">
 
         <label for="title">Job Role</label>
@@ -72,7 +72,7 @@
         </div>
       </fieldset>
 
-      <fieldset class="activities">
+      <fieldset id="acitivty-section" class="activities">
         <legend>Register for Activities</legend>
         <label id="1"><input type="checkbox" id="all" name="all"> Main Conference — $200</label>
         <label id="2"><input type="checkbox" id="js-frameworks" name="js-frameworks"> JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100</label>
@@ -84,11 +84,10 @@
 
       </fieldset>
       <fieldset>
-        <legend>Payment Info</legend>
+        <legend id="payment-heading">Payment Info</legend>
 
-        <label for="payment">I'm going to pay with:</label>
+        <label for="payment">Select a Payment Method:</label>
         <select id="payment" name="user_payment">
-          <option value="select_method">Select Payment Method</option>
           <option value="credit card">Credit Card</option>
           <option value="paypal">PayPal</option>
           <option value="bitcoin">Bitcoin</option>
@@ -96,7 +95,7 @@
 
         <div id="credit-card" class="credit-card">
 
-          <div class="col-6 col">
+          <div id="cc-number-head" class="col-6 col">
             <label for="cc-num">Card Number:</label>
         	  <input id="cc-num" name="user_cc-num" type="text">
           </div>
@@ -137,10 +136,10 @@
         </div>
 
         <div>
-        	<p>If you selected the PayPal option we'll take you to Paypal's site to set up your billing information, when you click “Register” below.</p>
+        	<p id="paypal">If you selected the PayPal option we'll take you to Paypal's site to set up your billing information, when you click “Register” below.</p>
         </div>
 
-        <div>
+        <div id="bitcoin">
         	<p>If you selected the Bitcoin option we'll take you to the Coinbase site to set up your billing information. Due to the nature of exchanging Bitcoin, all Bitcoin transactions will be final.</p>
         </div>
 
