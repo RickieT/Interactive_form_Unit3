@@ -84,15 +84,11 @@ $(document).ready(function () {
     if(isChecked) {
       expressWs.disabled = true;
       document.getElementById("4").style.color = "gray";
-      buildTools.disabled = true;
-      document.getElementById("6").style.color = "gray";
       updateCost(100);
     } else {
       updateCost(-100);
       expressWs.disabled = false;
       document.getElementById("4").style.color = "black";
-      buildTools.disabled = false;
-      document.getElementById("6").style.color = "black";
     }
   });
 
@@ -104,14 +100,10 @@ $(document).ready(function () {
     if(isChecked) {
       nodeWs.disabled = true;
       document.getElementById("5").style.color = "gray";
-      npmWs.disabled = true;
-      document.getElementById("7").style.color = "gray";
       updateCost(100);
     } else {
       nodeWs.disabled = false;
       document.getElementById("5").style.color = "black";
-      npmWs.disabled = false;
-      document.getElementById("7").style.color = "black";
       updateCost(-100);
     }
   });
@@ -124,14 +116,10 @@ $(document).ready(function () {
     if(isChecked) {
       jsFrameworks.disabled = true;
       document.getElementById("2").style.color = "gray";
-      buildTools.disabled = true;
-      document.getElementById("6").style.color = "gray";
       updateCost(100);
     } else {
       jsFrameworks.disabled = false;
       document.getElementById("2").style.color = "black";
-      buildTools.disabled = false;
-      document.getElementById("6").style.color = "black";
       updateCost(-100);
     }
   });
@@ -144,14 +132,10 @@ $(document).ready(function () {
     if(isChecked) {
       jsLibs.disabled = true;
       document.getElementById("3").style.color = "gray";
-      npmWs.disabled = true;
-      document.getElementById("7").style.color = "gray";
       updateCost(100);
     } else {
-      nodeWs.disabled = false;
+      jsLibs.disabled = false;
       document.getElementById("3").style.color = "black";
-      npmWs.disabled = false;
-      document.getElementById("7").style.color = "black";
       updateCost(-100);
     }
   });
@@ -162,16 +146,8 @@ $(document).ready(function () {
   buildTools.addEventListener('change', (e) => {
     const isChecked = e.target.checked;
     if(isChecked) {
-      jsFrameworks.disabled = true;
-      document.getElementById("2").style.color = "gray";
-      expressWs.disabled = true;
-      document.getElementById("4").style.color = "gray";
       updateCost(100);
     } else {
-      jsFrameworks.disabled = false;
-      document.getElementById("2").style.color = "black";
-      expressWs.disabled = false;
-      document.getElementById("4").style.color = "black";
       updateCost(-100);
     }
   });
@@ -182,16 +158,8 @@ $(document).ready(function () {
   npmWs.addEventListener('change', (e) => {
     const isChecked = e.target.checked;
     if(isChecked) {
-      jsLibs.disabled = true;
-      document.getElementById("3").style.color = "gray";
-      nodeWs.disabled = true;
-      document.getElementById("5").style.color = "gray";
       updateCost(100);
     } else {
-      jsLibs.disabled = false;
-      document.getElementById("3").style.color = "black";
-      nodeWs.disabled = false;
-      document.getElementById("5").style.color = "black";
       updateCost(-100);
     }
   });
@@ -228,13 +196,13 @@ $(document).ready(function () {
   // $('form').prepend('<p id="error-message"></p>')
   // $('#error-message').hide();
   $('form').submit(function (e){
-  	e.preventDefault();
     $('#email-error').hide();
     $('#activity-error').hide();
     $('#cc-error').hide();
     $('#name-error').hide();
     $('#cc-zip-error').hide();
     $('#cc-cvv-error').hide();
+    e.preventDefault();
 
     // So for the validation, check to see if the form was filled out properly, if not, show error at top.
     // Name field validation
