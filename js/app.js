@@ -8,6 +8,7 @@ $(document).ready(function () {
   // Display an input field if the job role 'other' is select_method
   $('#basic-info').append('<input type="text" id="other-field" placeholder="Your Job Title..." name="other_job">');
 
+  // Hide the alt OTHER field if JS is NOT disabled.
   $('#other-role-heading').hide();
   $('#other-field-nojs').hide();
 
@@ -204,7 +205,7 @@ $(document).ready(function () {
     $('#name-error').hide();
     $('#cc-zip-error').hide();
     $('#cc-cvv-error').hide();
-    e.preventDefault();
+
 
     // So for the validation, check to see if the form was filled out properly, if not, show error at top.
     // Name field validation
@@ -214,6 +215,8 @@ $(document).ready(function () {
     $("#name_field").append(errorMessage);
 		$('#name').focus();
     console.log("Error: no name was entered into the name field");
+    e.preventDefault();
+    return false;
 
     // Email Field Validation
 	} else if ( !emailAddress.test($('#mail').val()) ) {
@@ -222,6 +225,8 @@ $(document).ready(function () {
     $("#mail-field").append(errorMessage);
 		$('#mail').focus();
     console.log("Error: invalid email address entered");
+    e.preventDefault();
+    return false;
 
     // Activities Field Validation
 	} else if ( $(".activities > label > input:checked").length === 0 ) {
@@ -230,6 +235,8 @@ $(document).ready(function () {
     $(".activities").prepend(errorMessage);
     $('.activities').focus();
     console.log("Error: One activity must be registered for");
+    e.preventDefault();
+    return false;
 
     // Credit Card Field Validation
 	} else if ( $("#payment").val() === "credit card" && !creditCard.test($("#cc-num").val()) )  {
@@ -238,6 +245,8 @@ $(document).ready(function () {
     $('#payment-heading').append(errorMessage);
 		$('#cc-num').focus();
     console.log("Error: invalid credit card entered or missing card info");
+    e.preventDefault();
+    return false;
 
     // Zip Code Field Validation
 	} else if ( $("#payment").val() === "credit card" && !zipCode.test($("#zip").val()) )  {
@@ -246,6 +255,8 @@ $(document).ready(function () {
     $('#payment-heading').append(errorMessage);
 		$('#zip').focus();
     console.log("Error: invalid credit card entered or missing card info");
+    e.preventDefault();
+    return false;
 
     // CVV Field Validation
 	} else if ( $("#payment").val() === "credit card" && $("#cvv").val().length < 3)  {
@@ -253,6 +264,8 @@ $(document).ready(function () {
     errorMessage = "<br><p id='cc-cvv-error' style='color:red; font-size:16px;'> Error: Please enter a valid CVV number. </p>";
     $('#payment-heading').append(errorMessage);
 		$('#cvv').focus();
+    e.preventDefault();
+    return false;
 	} else {
     // Success Message
 		$("html, body").animate({scrollTop: 0}, "slow");
