@@ -8,6 +8,8 @@ $(document).ready(function () {
   // Display an input field if the job role 'other' is select_method
   $('#basic-info').append('<input type="text" id="other-field" placeholder="Your Job Title..." name="other_job">');
 
+  $('#other-role-heading').hide();
+  $('#other-field-nojs').hide();
 
 
   // Hide the text field until role is chosen
